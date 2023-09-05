@@ -5,7 +5,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import samdasu.recipt.domain.common.BaseEntity;
-import samdasu.recipt.domain.controller.dto.Review.ReviewUpdateRequestDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,47 +41,38 @@ public class Review extends BaseEntity {
     private List<Heart> hearts = new ArrayList<>();
 
     //== 연관관계 편의 메서드 ==//
-    public void addUser(User user) {
-        this.user = user;
-        user.getReviews().add(this);
-    }
 
-    public void addRegisterRecipe(RegisterRecipe registerRecipe) {
-        this.registerRecipe = registerRecipe;
-        registerRecipe.getReviews().add(this);
-    }
-
-    public void addRecipe(Recipe recipe) {
-        this.recipe = recipe;
-        recipe.getReview().add(this);
-    }
     //==생성 메서드==//
-
-
-    public Review(String comment, Integer likeCount, Double ratingScore) {
+    public Review(String comment, Integer likeCount, Double ratingScore, User user, Recipe recipe) {
         this.comment = comment;
         this.likeCount = likeCount;
         this.ratingScore = ratingScore;
+        this.user = user;
+        this.recipe = recipe;
     }
 
     public static Review createRecipeReview(String comment, Integer likeCount, Double ratingScore, User user, Recipe recipe) {
-        Review review = new Review(comment, likeCount, ratingScore);
-        review.addUser(user);
-        review.addRecipe(recipe);
+        Review review = new Review(comment, likeCount, ratingScore, user, recipe);
         return review;
     }
 
+    public Review(String comment, Integer likeCount, Double ratingScore, User user, RegisterRecipe registerRecipe) {
+        this.comment = comment;
+        this.likeCount = likeCount;
+        this.ratingScore = ratingScore;
+        this.user = user;
+        this.registerRecipe = registerRecipe;
+    }
+
     public static Review createRegisterReview(String comment, Integer likeCount, Double ratingScore, User user, RegisterRecipe registerRecipe) {
-        Review review = new Review(comment, likeCount, ratingScore);
-        review.addUser(user);
-        review.addRegisterRecipe(registerRecipe);
+        Review review = new Review(comment, likeCount, ratingScore, user, registerRecipe);
         return review;
     }
 
     //==비지니스 로직==//
 
-    public void updateReviewInfo(ReviewUpdateRequestDto reviewUpdateRequestDto) {
-        this.comment = reviewUpdateRequestDto.getComment();
+    public void updateReviewInfo(String inputComment) {
+        this.comment = inputComment;
     }
 
 }

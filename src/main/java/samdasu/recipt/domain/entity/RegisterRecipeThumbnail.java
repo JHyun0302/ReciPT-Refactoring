@@ -29,12 +29,11 @@ public class RegisterRecipeThumbnail extends BaseTimeEntity {
     private RegisterRecipe registerRecipe;
 
     //== 연관관계 편의 메서드 ==//
-
     public void setRegisterRecipe(RegisterRecipe registerRecipe) {
         this.registerRecipe = registerRecipe;
     }
 
-    //==생성 메서드==// 앞으로 생성하는 지점 변경 시에는 여기만 수정하면 됨!
+    //==생성 메서드==//
     public RegisterRecipeThumbnail(String filename, String type, byte[] thumbnailData) {
         this.filename = filename;
         this.type = type;

@@ -35,13 +35,11 @@ public class Recipe extends BaseTimeEntity {
     private Double ratingScore;
     private Integer ratingPeople;
 
-
     @OneToMany(mappedBy = "recipe")
     private List<Review> review = new ArrayList<>();
 
     @OneToMany(mappedBy = "recipe")
     private List<Heart> hearts = new ArrayList<>();
-
 
     //==생성 메서드==/
     public Recipe(String foodName, String ingredient, String category, String thumbnailImage, String context, String image, Long viewCount, Integer likeCount, Double ratingScore, Integer ratingPeople) {

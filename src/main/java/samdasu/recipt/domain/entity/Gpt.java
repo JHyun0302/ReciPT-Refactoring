@@ -35,21 +35,17 @@ public class Gpt extends BaseTimeEntity {
     private List<RegisterRecipe> registerRecipes = new ArrayList<>();
 
     //== 연관관계 편의 메서드 ==//
-    public void addUser(User user) {
-        this.user = user;
-        user.getGpt().add(this);
-    }
 
     //==생성 메서드==/
-    public Gpt(String foodName, String ingredient, String context) {
+    public Gpt(String foodName, String ingredient, String context, User user) {
         this.foodName = foodName;
         this.ingredient = ingredient;
         this.context = context;
+        this.user = user;
     }
 
     public static Gpt createGpt(String foodName, String ingredient, String context, User user) {
-        Gpt gpt = new Gpt(foodName, ingredient, context);
-        gpt.addUser(user);
+        Gpt gpt = new Gpt(foodName, ingredient, context, user);
         return gpt;
     }
 }

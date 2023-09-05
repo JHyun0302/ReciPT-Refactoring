@@ -36,25 +36,6 @@ public class Heart extends BaseTimeEntity {
     private Review review;
 
     //== 연관관계 편의 메서드 ==//
-    public void addUser(User user) {
-        this.user = user;
-        user.getHearts().add(this);
-    }
-
-    public void addRecipe(Recipe recipe) {
-        this.recipe = recipe;
-        recipe.getHearts().add(this);
-    }
-
-    public void addRegisterRecipe(RegisterRecipe registerRecipe) {
-        this.registerRecipe = registerRecipe;
-        registerRecipe.getHearts().add(this);
-    }
-
-    public void addReview(Review review) {
-        this.review = review;
-        review.getHearts().add(this);
-    }
 
     //==생성 메서드==//
     public Heart(User user, Recipe recipe) {
@@ -63,10 +44,7 @@ public class Heart extends BaseTimeEntity {
     }
 
     public static Heart createRecipeHeart(User user, Recipe recipe) {
-        Heart heart = new Heart();
-        heart.addUser(user);
-        heart.addRecipe(recipe);
-        return heart;
+        return new Heart(user, recipe);
     }
 
     public Heart(User user, RegisterRecipe registerRecipe) {
@@ -75,10 +53,7 @@ public class Heart extends BaseTimeEntity {
     }
 
     public static Heart createRegiterRecipeHeart(User user, RegisterRecipe registerRecipe) {
-        Heart heart = new Heart();
-        heart.addUser(user);
-        heart.addRegisterRecipe(registerRecipe);
-        return heart;
+        return new Heart(user, registerRecipe);
     }
 
     public Heart(User user, Review review) {
@@ -87,9 +62,6 @@ public class Heart extends BaseTimeEntity {
     }
 
     public static Heart createReviewHeart(User user, Review review) {
-        Heart heart = new Heart();
-        heart.addUser(user);
-        heart.addReview(review);
-        return heart;
+        return new Heart(user, review);
     }
 }

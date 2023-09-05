@@ -71,7 +71,8 @@ public class ReviewService {
     @Transactional
     public Long update(Long reviewId, ReviewUpdateRequestDto reviewUpdateRequestDto) {
         Review review = findById(reviewId);
-        review.updateReviewInfo(reviewUpdateRequestDto);
+        String inputComment = reviewUpdateRequestDto.getComment();
+        review.updateReviewInfo(inputComment);
         return reviewId;
     }
 
