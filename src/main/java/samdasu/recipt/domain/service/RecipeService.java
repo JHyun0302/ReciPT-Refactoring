@@ -11,7 +11,9 @@ import samdasu.recipt.domain.exception.ResourceNotFoundException;
 import samdasu.recipt.domain.repository.recipe.RecipeRepository;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 @Transactional(readOnly = true)
@@ -90,11 +92,25 @@ public class RecipeService {
         return recipeRepository.Top10RatingScore();
     }
 
-    public List<String> RecommendByRandH2() {
-        return recipeRepository.RecommendByRandH2();
-    }
+    public List<Long> RandomRecommend() {
+        List<Recipe> recipes = recipeRepository.findAll();
+        List<Long> recipesId = new ArrayList<>();
+        List<Long> result = new ArrayList<>();
 
-    public List<String> RecommendByRandMySql() {
-        return recipeRepository.RecommendByRandMySql();
+        for (Recipe recipe : recipes) {
+            recipesId.add(recipe.getRecipeId());
+        }
+
+        if (recipesId.isEmpty()) {
+            throw new IllegalArgumentException("Error : No recipe data!");
+        }
+
+        Random random = new Random();
+
+        while (result.size() < 10) {
+            result.add(recipesId.get(random.nextInt(recipesId.size())));
+        }
+
+        return result;
     }
 }

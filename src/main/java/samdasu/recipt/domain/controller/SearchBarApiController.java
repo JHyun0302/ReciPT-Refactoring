@@ -19,6 +19,7 @@ import samdasu.recipt.security.config.auth.PrincipalDetails;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,14 +58,15 @@ public class SearchBarApiController {
     }
 
     private List<String> randomRecommend() throws SQLException {
-        List<String> recommend;
+        List<String> recommend = new ArrayList<>();
         String databaseUrl = dataSource.getConnection().getMetaData().getURL();
         log.info("databaseUrl = {}", databaseUrl);
-        if (databaseUrl.contains("h2")) {
-            recommend = recipeService.RecommendByRandH2();
-        } else {
-            recommend = recipeService.RecommendByRandMySql();
+
+        List<Long> randomPk = recipeService.RandomRecommend();
+        for (Long pk : randomPk) {
+            recommend.add(recipeService.findById(pk).getFoodName());
         }
+        
         return recommend;
     }
 

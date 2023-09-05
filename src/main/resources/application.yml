@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/h2_DB/ReciPT
+    url: jdbc:h2:tcp://localhost/~/h2_DB/ReciPT-Refactor
     username: sa
     password:
     driver-class-name: org.h2.Driver
@@ -55,3 +55,11 @@ server:
 logging.level:
   org.hibernate.SQL: debug
   #org.hibernate.type: trace      # 파라미터까지 볼 수 있음
+
+gpt:
+  api:
+    key: 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
+
+excel:
+  file:
+    path: /Users/jaehyun/Documents/IdeaProjects/ReciPT/ReciPT-backend/dbRecipes.xlsx

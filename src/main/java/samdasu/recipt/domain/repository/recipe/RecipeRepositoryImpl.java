@@ -1,8 +1,6 @@
 package samdasu.recipt.domain.repository.recipe;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.core.types.dsl.Expressions;
-import com.querydsl.core.types.dsl.NumberExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -118,26 +116,4 @@ public class RecipeRepositoryImpl implements RecipeCustomRepository {
                 .where(recipe.createDate.loe(yesterday))
                 .execute();
     }
-
-
-    @Override
-    public List<String> RecommendByRandH2() {
-        return queryFactory
-                .select(recipe.foodName)
-                .from(recipe)
-                .orderBy(NumberExpression.random().asc())
-                .limit(10)
-                .fetch();
-    }
-
-    @Override
-    public List<String> RecommendByRandMySql() {
-        return queryFactory
-                .select(recipe.foodName)
-                .from(recipe)
-                .orderBy(Expressions.numberTemplate(Double.class, "RAND()").asc())
-                .limit(10)
-                .fetch();
-    }
-
 }

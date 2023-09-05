@@ -23,8 +23,4 @@ public interface RecipeCustomRepository {
     List<Recipe> Top10RecentRegister();
 
     void resetViewCount(LocalDateTime yesterday);
-
-    List<String> RecommendByRandH2(); //h2 DB
-
-    List<String> RecommendByRandMySql(); //MySql DB
 }
