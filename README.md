@@ -18,4 +18,10 @@
         1. `Controller`에 분기문을 넣어서 recipe를 쓸지 registerRecipe를 쓸지 결정해야함. (SRP 어김)
         2. 역할과 구현 나누기
 
+4. **`jwt 구현 방식 변경`**
+    - 기존 방식 : DB의 `WebSecurityConfigurerAdapter` 사용
+    - refactoring : `@PreAuthorized` 사용하기
+    - 이유
+        1. 스프링 버전이 올라가면서 `WebSecurityConfigurerAdapter` 지원하지 않음
+
 ### [ERD 분석](https://www.figma.com/file/rJlqqSI2Ssyokn2VRqT2z3/ReciPT-%EB%B6%84%EC%84%9D?type=whiteboard&node-id=0-1&t=0inp0EkyTL42uJTP-0)
