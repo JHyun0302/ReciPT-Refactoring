@@ -2,6 +2,7 @@ package samdasu.recipt.service;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @Transactional
+@Slf4j
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class ReviewServiceTest {
     @PersistenceContext
@@ -44,6 +46,10 @@ class ReviewServiceTest {
 
         //when
         reviewRepository.addReviewLikeCount(review);
+        em.flush();
+        em.clear();
+        
+        log.info("review.getLikeCount={}", review.getLikeCount());
         //then
         assertEquals(review.getLikeCount(), 1);
     }
