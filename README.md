@@ -11,13 +11,6 @@
         1. `Controller`에서 분기문을 넣어줘야함. (SRP 어김)
         2. `DB 종류가 바뀌면 Repository, Service, Controller에 값을 추가하거나 빼야한다.`
 
-3. **`Recipe` & `registerRecipe` 추상화**
-    - 기존 방식 : 추상화 없이 구체화 클래스만 존재
-    - refactoring : 공통 작업을 추상화 할 수 있는 인터페이스 & config 도입
-    - 이유
-        1. `Controller`에 분기문을 넣어서 recipe를 쓸지 registerRecipe를 쓸지 결정해야함. (SRP 어김)
-        2. 역할과 구현 나누기
-
 4. **`jwt 구현 방식 변경`**
     - 기존 방식 : DB의 `WebSecurityConfigurerAdapter` 사용
     - refactoring : `@PreAuthorized` 사용하기
