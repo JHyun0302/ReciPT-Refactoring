@@ -1,9 +1,9 @@
 package samdasu.recipt.api.db;
 
+import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import samdasu.recipt.domain.entity.Recipe;
 import samdasu.recipt.domain.repository.recipe.RecipeRepository;
 
@@ -12,16 +12,20 @@ import java.io.IOException;
 import java.util.List;
 
 @Slf4j
-@Configuration
+@Component
 public class InsertInitData {
+    private final String excelFilePath;
+    private final InsertRecipeService insertRecipeService;
+    private final RecipeRepository recipeRepository;
 
-    private static String excelFilePath;
-
-    public InsertInitData(@Value("${excel.file.path}") String excelFile) {
-        InsertInitData.excelFilePath = excelFile;
+    public InsertInitData(@Value("${excel.file.path}") String excelFile, InsertRecipeService insertRecipeService, RecipeRepository recipeRepository) {
+        this.excelFilePath = excelFile;
+        this.insertRecipeService = insertRecipeService;
+        this.recipeRepository = recipeRepository;
     }
 
-    public static void insertInitData(ApplicationContext context, InsertRecipeService insertRecipeService) {
+    @PostConstruct
+    public void insertInitData() {
         log.info("excelFilePath = {}", excelFilePath);
         try {
             // 엑셀 파일에서 데이터 읽기
@@ -33,13 +37,12 @@ public class InsertInitData {
             }
 
             // 삽입된 레시피 개수 출력
-            RecipeRepository recipeRepository = context.getBean(RecipeRepository.class);
             List<Recipe> insertedRecipes = recipeRepository.findAll();
-            System.out.println("=========================");
-            System.out.println("insertedRecipes.size: " + insertedRecipes.size());
-            System.out.println("=========================");
+            log.info("=========================");
+            log.info("insertedRecipes.size: {}", insertedRecipes.size());
+            log.info("=========================");
         } catch (IOException e) {
-            System.out.println("Error reading Excel file: " + e.getMessage());
+            log.debug("Error reading Excel file: ", e.getMessage());
             e.printStackTrace();
         }
     }
