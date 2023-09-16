@@ -28,6 +28,8 @@
            의존관계 생성됨
         2. 기존 방식은 `InsertInitData` 클래스에도 필요없는 클래스의 의존 관계가 있어서 코드 리팩토링이 필요했다고 판단
 
+7. Aop를 이용한 트랜잭션 시 로그 출력 기능 추가
+
 ### [ERD 분석 - Figma](https://www.figma.com/file/rJlqqSI2Ssyokn2VRqT2z3/ReciPT-%EB%B6%84%EC%84%9D?type=whiteboard&node-id=0-1&t=0inp0EkyTL42uJTP-0)
 
 ### [ERD 분석 - ERDCloud](https://www.erdcloud.com/d/Q7WxraMMoDsuDJS3j)
