@@ -33,6 +33,9 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok'
     testAnnotationProcessor 'org.projectlombok:lombok'
 
+    //    aop
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    
     //    h2 DB
     runtimeOnly 'com.h2database:h2'
 
